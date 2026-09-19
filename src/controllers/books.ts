@@ -8,6 +8,18 @@ export const getAllBooks = (req: Request, res: Response) =>{
     res.status(200).json(books);
 };
 
+export const getBookById = (req: Request, res: Response) =>{
+    const{ id } = req.params;
+    const book = books.find(
+        (book) => book.id === Number(id)
+    );
+    if(!book){
+        return res.status(404).send("Book not found");
+    }
+
+    res.status(200).json(book);
+};
+
 export const createBook = (req: Request, res: Response) =>{
     const{ title, year, authorId } = req.body;
 
