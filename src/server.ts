@@ -2,6 +2,7 @@ import express, { Express } from "express"
 import bodyParser = require("body-parser");
 import { Router } from "express";
 import { router } from "./routes/author";
+import { bookRouter } from "./routes/book"
 
 
 const app: Express = express()
@@ -12,7 +13,7 @@ app.use(bodyParser.json())
 
 
 app.use("/v1/authors", router)
-
+app.use("/v1/books", bookRouter)
 
 
 app.listen(PORT, () =>{

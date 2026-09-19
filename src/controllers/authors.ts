@@ -26,6 +26,7 @@ const newAuthor:Author = {id: authors.length + 1, name , surname};
 authors.push(newAuthor);
 res.status(201).json(newAuthor)
 }
+
 export const deleteAuthor = (req: Request, res: Response) => {
     const { id } = req.params;
     const authorIndex = authors.findIndex(
@@ -36,4 +37,19 @@ export const deleteAuthor = (req: Request, res: Response) => {
     }
     const deletedAuthor = authors.splice(authorIndex, 1);
     res.status(200).json(deletedAuthor[0]);
+};
+
+export const updateAuthor = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name, surname } = req.body;
+    const author = authors.find(
+        (author) => author.id === Number(id)
+    );
+    if (!author) {
+        return res.status(404).send("Author not found");
+    }
+    author.name = name;
+    author.surname = surname;
+    
+    res.status(200).json(author);
 };

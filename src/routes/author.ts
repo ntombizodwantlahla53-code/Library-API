@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { body, param, validationResult } from "express-validator";
-import { getAllAuthors, getAuthorById, createAuthor ,deleteAuthor} from "../controllers/authors";
+import { getAllAuthors, getAuthorById, createAuthor ,deleteAuthor,updateAuthor} from "../controllers/authors";
 
 
 export const router = Router();
@@ -15,10 +15,10 @@ router.get(
 
     console.log(errors, "errors from express-validator middleware");
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    if(!errors.isEmpty()){
+      return res.status(400).json({ errors: errors.array()});
     }
-   getAuthorById(req, res);
+   getAuthorById(req,res);
   },
 );
 
@@ -30,10 +30,10 @@ router.post(
   ],
   (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    if(!errors.isEmpty()){
+      return res.status(400).json({ errors: errors.array()});
     }
-    createAuthor(req, res);
+    createAuthor(req,res);
   },
 );
 
@@ -43,9 +43,26 @@ router.delete(
   (req: Request, res: Response) => {
     const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    if(!errors.isEmpty()){
+      return res.status(400).json({ errors: errors.array()});
     }
-    deleteAuthor(req, res);
+    deleteAuthor(req,res);
+  }
+);
+
+router.put(
+  "/:id",
+  [
+    param("id").isInt().withMessage("ID must be integer"),
+    body("name").notEmpty().withMessage("Name is required"),
+    body("surname").notEmpty().withMessage("Surname is required"),
+  ],
+  (req: Request, res: Response) =>{
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+      return res.status(400).json({ errors: errors.array()});
+    }
+    updateAuthor(req, res);
   }
 );
