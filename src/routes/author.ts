@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { body, param, validationResult } from "express-validator";
-import { getAllAuthors, getAuthorById, createAuthor } from "../controllers/authors";
+import { getAllAuthors, getAuthorById, createAuthor ,deleteAuthor} from "../controllers/authors";
+
 
 export const router = Router();
 
@@ -34,4 +35,17 @@ router.post(
     }
     createAuthor(req, res);
   },
+);
+
+router.delete(
+  "/:id",
+  [param("id").isInt().withMessage("ID must be an integer")],
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    deleteAuthor(req, res);
+  }
 );
