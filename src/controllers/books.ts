@@ -29,7 +29,17 @@ export const createBook = (req: Request, res: Response) =>{
     if(!author){
         return res.status(404).send("author iz not found");
     }
-    const newBook: Book ={id: books.length + 1, title, year, authorId: Number(authorId)};
+
+const duplicateBook = books.find(
+    (book) =>
+        book.title.toLowerCase() === title.toLowerCase()&& book.year === Number(year) && book.authorId === Number(authorId)
+);
+   if(duplicateBook){
+    return res.status(409).json({error: "Conflict", message: "A book with the same title,sameyear and author already exists"
+    });
+    }
+
+const newBook: Book ={id: books.length + 1, title, year, authorId: Number(authorId)};
     books.push(newBook);
 
     res.status(201).json(newBook);
