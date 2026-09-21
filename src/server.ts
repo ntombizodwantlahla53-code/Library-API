@@ -16,8 +16,8 @@ app.use(bodyParser.json())
 app.use(loggerMiddleware);
 
 
-app.use("/v1/authors", router)
-app.use("/v1/books", bookRouter)
+app.use("/authors", router)
+app.use("/books", bookRouter)
 
 app.use(notFounderHandler)
 

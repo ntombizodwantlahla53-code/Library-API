@@ -21,17 +21,17 @@
 //   },
 // );
 
-router.post(
-  "/",
-  [
-    body("name").notEmpty().withMessage("Name is required"),
-    body("email").isEmail().withMessage("Must be a valid email address"),
-  ],
-  (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    createUser(req, res);
-  },
-);
+// router.post(
+//   "/",
+//   [
+//     body("name").notEmpty().withMessage("Name is required"),
+//     body("email").isEmail().withMessage("Must be a valid email address"),
+//   ],
+//   (req: Request, res: Response) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+//     createUser(req, res);
+//   },
+// );

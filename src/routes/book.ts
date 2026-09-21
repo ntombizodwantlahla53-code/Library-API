@@ -8,7 +8,7 @@ bookRouter.get("/", getAllBooks);
 
 bookRouter.get(
     "/:id",
-    [param("id").isInt().withMessage("ID must be an integer")],
+    [param("id").isInt().withMessage("Id must be an integer")],
     (req: Request, res: Response) =>{
         const errors = validationResult(req);
 if(!errors.isEmpty()){
