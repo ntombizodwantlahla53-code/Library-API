@@ -1,5 +1,7 @@
 # LIBRARY API
 
+<img src="https://socialify.git.ci/ntombizodwantlahla53-code/Library-API/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="Library-API" width="640" height="320" />
+
 ## Project Overview
 
 The Library API is a RESTful API built using TypeScript and Express.js. It allows a local community library to manage authors and books.
